@@ -11,7 +11,7 @@ import org.example.util.PerformanceReporter;
 public class Main {
 
     public static void main(String[] args) {
-        int enemigos =  400;
+        int enemigos =  100_000;
         LineaEvolutiva miPokemon1 = EscenarioOficial.Pokemon1();
         LineaEvolutiva miPokemon2 = EscenarioOficial.Pokemon2();
         LineaEvolutiva miPokemon3 = EscenarioOficial.Pokemon3();
