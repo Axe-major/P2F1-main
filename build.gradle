@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.openjdk.jol:jol-core:0.17'
+    implementation 'com.github.oshi:oshi-core:6.6.5'
+
+    implementation 'org.apache.logging.log4j:log4j-core:2.24.1'
+    implementation 'org.apache.logging.log4j:log4j-slf4j2-impl:2.24.1'
+
+
+
+    testImplementation platform('org.junit:junit-bom:6.0.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+
+
+// Recomendacion de la IA, por cosas relacionas con permisos de JOL y Oshi
+tasks.withType(JavaExec).configureEach {
+    jvmArgs '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+            '--enable-native-access=ALL-UNNAMED'
+}
+tasks.withType(JavaExec).configureEach {
+    jvmArgs '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+            '--enable-native-access=ALL-UNNAMED',
+            '-XX:+EnableDynamicAgentLoading',
+            '-Dfile.encoding=UTF-8'
+    }
